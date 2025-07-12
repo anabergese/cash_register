@@ -1,16 +1,16 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 tea:
-  code: TA1
-  name: Black Tea
-  price_cents: 100
+  code: GR1
+  name: Green Tea
+  price_cents: 311
 
-mate:
-  code: MT1
-  name: Mate
+strawberries:
+  code: SR1
+  name: Strawberries
   price_cents: 500
 
-water:
-  code: WT1
-  name: Water
-  price_cents: 50
+coffee:
+  code: CF1
+  name: Coffee
+  price_cents: 1123

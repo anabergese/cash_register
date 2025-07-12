@@ -1,0 +1,16 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cart: one
+  product: tea
+  quantity: 1
+
+two:
+  cart: two
+  product: strawberries
+  quantity: 2
+
+three:
+  cart: one
+  product: coffee
+  quantity: 2
