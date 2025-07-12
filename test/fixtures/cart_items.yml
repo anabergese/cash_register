@@ -6,7 +6,7 @@ one:
   quantity: 1
 
 two:
-  cart: two
+  cart: one
   product: strawberries
   quantity: 2
 
