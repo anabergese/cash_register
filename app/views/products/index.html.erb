@@ -1,12 +1,41 @@
-<h1>Products#index</h1>
-<div class="products">
-<ul>
+<%= tag.div data: {
+      controller: "cart",
+      cart_products_value: @products.index_by(&:code).as_json(only: [:code, :name, :price_cents])
+    } do %>
+
+  <h1>Products</h1>
+
   <% @products.each do |product| %>
-    <li>
-      <strong><%= product.code %></strong> -
-      <%= product.name %> -
-      <%= product.price_cents / 100.0 %> €
-    </li>
+    <div data-product-id="<%= product.code %>" class="product">
+      <strong><%= product.name %></strong>
+      <p>€<%= '%.2f' % (product.price_cents / 100.0) %></p>
+
+      <button
+        data-action="click->cart#decrease"
+        data-product-code="<%= product.code %>">
+        -
+      </button>
+
+      <span
+        data-cart-target="quantity"
+        id="quantity-<%= product.code %>">
+        0
+      </span>
+
+      <button
+        data-action="click->cart#increase"
+        data-product-code="<%= product.code %>">
+        +
+      </button>
+    </div>
+    <hr>
   <% end %>
-</ul>
-</div>
+
+  <h2>Cart Summary</h2>
+  <ul data-cart-target="summary"></ul>
+
+  <h3>Total: €<span data-cart-target="total">0.00</span></h3>
+
+  <button disabled>Confirm Purchase (Not Functional Yet)</button>
+
+<% end %>
