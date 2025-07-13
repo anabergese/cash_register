@@ -1,41 +1,64 @@
+<% products_json = @products.index_by(&:code).as_json(only: [:code, :name, :price_cents ]).to_json.gsub('"', '&quot;') %>
+
 <%= tag.div data: {
-      controller: "cart",
-      cart_products_value: @products.index_by(&:code).as_json(only: [:code, :name, :price_cents])
+      controller: "builder",
+      builder_products_value: products_json
     } do %>
 
-  <h1>Products</h1>
 
-  <% @products.each do |product| %>
-    <div data-product-id="<%= product.code %>" class="product">
-      <strong><%= product.name %></strong>
-      <p>€<%= '%.2f' % (product.price_cents / 100.0) %></p>
+  <h1>Available Products</h1>
 
-      <button
-        data-action="click->cart#decrease"
-        data-product-code="<%= product.code %>">
-        -
-      </button>
+  <table>
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.name %></td>
+          <td>€<%= '%.2f' % (product.price_cents / 100.0) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-      <span
-        data-cart-target="quantity"
-        id="quantity-<%= product.code %>">
-        0
-      </span>
+  <hr>
 
-      <button
-        data-action="click->cart#increase"
-        data-product-code="<%= product.code %>">
-        +
-      </button>
-    </div>
-    <hr>
+  <h2>Build Your Order</h2>
+
+  <%= form_with url: cart_items_path, method: :post do %>
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <td><%= product.name %></td>
+            <td>
+              <input
+                type="number"
+                name="cart[<%= product.code %>]"
+                min="0"
+                value="0"
+                data-builder-target="quantity"
+                data-product-code="<%= product.code %>"
+              />
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <h3>Total: €<span data-builder-target="total">0.00</span></h3>
+    <p><em>Click "Add to cart" to see if your order qualifies for a discount.</em></p>
+    <%= submit_tag "Add to cart" %>
   <% end %>
-
-  <h2>Cart Summary</h2>
-  <ul data-cart-target="summary"></ul>
-
-  <h3>Total: €<span data-cart-target="total">0.00</span></h3>
-
-  <button disabled>Confirm Purchase (Not Functional Yet)</button>
 
 <% end %>
