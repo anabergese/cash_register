@@ -44,24 +44,6 @@ class CartItemsController < ApplicationController
         end
     end
 
-
-    def decrease
-        product = Product.find_by!(code: params[:product_code])
-        cart = Cart.first_or_create!(status: "open") # o el actual
-        item = cart.cart_items.find_by(product: product)
-
-        if item
-            item.quantity -= 1
-            if item.quantity <= 0
-            item.destroy
-            else
-            item.save!
-            end
-        end
-
-        @cart = cart
-    end
-
     private
 
     def set_product
