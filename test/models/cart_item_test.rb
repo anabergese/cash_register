@@ -26,4 +26,3 @@ class CartItemTest < ActiveSupport::TestCase
         assert_not item.valid?
     end
 end
-

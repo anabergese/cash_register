@@ -7,7 +7,7 @@ class CheckoutFromCartTest < ActiveSupport::TestCase
         cart.cart_items.create!(product: products(:strawberries), quantity: 2) # < 3
         cart.cart_items.create!(product: products(:coffee), quantity: 2)       # < 3
 
-        products = cart.cart_items.flat_map { |item| [item.product] * item.quantity }
+        products = cart.cart_items.flat_map { |item| [ item.product ] * item.quantity }
         total = Checkout.new(products: products).total_price_cents
 
         # 311 (tea) + 2×500 (strawberries) + 2×1123 (coffee) = 311 + 1000 + 2246 = 3557
@@ -18,7 +18,7 @@ class CheckoutFromCartTest < ActiveSupport::TestCase
         cart = Cart.create!(status: "open")
         cart.cart_items.create!(product: products(:strawberries), quantity: 3)
 
-        products = cart.cart_items.flat_map { |item| [item.product] * item.quantity }
+        products = cart.cart_items.flat_map { |item| [ item.product ] * item.quantity }
         total = Checkout.new(products: products).total_price_cents
 
         # 3 × 450 = 1350
@@ -29,7 +29,7 @@ class CheckoutFromCartTest < ActiveSupport::TestCase
         cart = Cart.create!(status: "open")
         cart.cart_items.create!(product: products(:coffee), quantity: 3)
 
-        products = cart.cart_items.flat_map { |item| [item.product] * item.quantity }
+        products = cart.cart_items.flat_map { |item| [ item.product ] * item.quantity }
         total = Checkout.new(products: products).total_price_cents
 
         # 1123 × 2/3 ≈ 748.67 → redondeado a 749
@@ -43,7 +43,7 @@ class CheckoutFromCartTest < ActiveSupport::TestCase
         cart.cart_items.create!(product: products(:tea), quantity: 2)
         cart.cart_items.create!(product: products(:coffee), quantity: 3)
 
-        products = cart.cart_items.flat_map { |item| [item.product] * item.quantity }.shuffle
+        products = cart.cart_items.flat_map { |item| [ item.product ] * item.quantity }.shuffle
         total = Checkout.new(products: products).total_price_cents
 
         # Strawberries (3×450 = 1350)
