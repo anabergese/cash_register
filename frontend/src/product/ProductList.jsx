@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import ProductForm from "./ProductForm";
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:3000/products.json")
+        fetch("/products.json")
         .then((res) => res.json())
         .then((data) => {
             setProducts(data);
@@ -24,6 +25,8 @@ const ProductList = () => {
             </li>
             ))}
         </ul>
+        <h1>Build Your Order</h1>
+        <ProductForm products={products} />
         </div>
     );
 };

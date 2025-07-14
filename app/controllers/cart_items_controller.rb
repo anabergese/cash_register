@@ -2,7 +2,7 @@ class CartItemsController < ApplicationController
     before_action :set_product
 
     def create
-        @cart = Cart.first_or_create!(status: "open")
+        @cart = Cart.create!(status: "open")
 
         params[:cart]&.each do |code, quantity_str|
             quantity = quantity_str.to_i
