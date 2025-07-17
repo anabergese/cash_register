@@ -29,16 +29,23 @@ export default function ProductSelectionForm({ products }) {
 
         const payload = { cart: quantities };
 
-        await fetch("/cart_items", {
-        method: "POST",
-        headers: {
+        const response = await fetch("/cart_items", {
+            method: "POST",
+            headers: {
             "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+            },
+            body: JSON.stringify(payload),
         });
 
-        navigate("/carts/1");
+        const data = await response.json();
+        console.log("Data from POST:", data);
+        if (data?.cart_id) {
+            navigate(`/carts/${data.cart_id}`);
+        } else {
+            console.error("No cart ID returned");
+        }
     };
+
 
     return (
         <div>

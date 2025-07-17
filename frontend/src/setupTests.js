@@ -3,3 +3,21 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
+
+beforeAll(() => {
+    jest.spyOn(console, 'warn').mockImplementation((msg, ...args) => {
+        if (
+        typeof msg === 'string' &&
+        msg.includes("React Router Future Flag Warning")
+        ) {
+        return;
+        }
+        console.warn(msg, ...args);
+    });
+});
+
+afterAll(() => {
+    if (console.warn.mockRestore) {
+        console.warn.mockRestore();
+    }
+});

@@ -25,7 +25,6 @@ const ProductList = () => {
             </li>
             ))}
         </ul>
-        <h1>Build Your Order</h1>
         <ProductForm products={products} />
         </div>
     );
