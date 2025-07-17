@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import OrderConfirmationButton from "../app/common/OrderConfirmationButton";
 
 export default function CartDetails() {
     const { id } = useParams();
@@ -38,6 +39,7 @@ export default function CartDetails() {
             </tbody>
         </table>
         <h2>Total: €{total.toFixed(2)}</h2>
+        <OrderConfirmationButton>Confirm Order</OrderConfirmationButton>
         </div>
     );
 }

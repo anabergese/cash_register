@@ -1,0 +1,13 @@
+.order_confirmation {
+    background-color: #f2d77f;
+    font-size: 14px;
+    border-radius: 6px;
+    padding: 12px 24px;
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+
+.order_confirmation:focus {
+    outline: none;
+}

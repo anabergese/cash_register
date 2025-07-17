@@ -1,0 +1,13 @@
+.add_to_cart {
+    background-color: #2d6deb;
+    font-size: 14px;
+    border-radius: 6px;
+    padding: 12px 24px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.add_to_cart:focus {
+    outline: none;
+}

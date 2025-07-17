@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import AddToCartButton from "../app/common/AddToCartButton";
 
 export default function ProductSelectionForm({ products }) {
     const [quantities, setQuantities] = useState({});
@@ -81,7 +82,7 @@ export default function ProductSelectionForm({ products }) {
             <p>
             <em>Click "Add to cart" to see if your order qualifies for a discount.</em>
             </p>
-            <button type="submit">Add to cart</button>
+            <AddToCartButton type="submit">Add to cart</AddToCartButton>
         </form>
         </div>
     );
