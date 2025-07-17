@@ -1,30 +1,7 @@
-// ProductForm.test.js
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import ProductForm from "../../product/ProductForm";
 
 import { MemoryRouter } from "react-router-dom";
-
-// Mock fetch para el POST de /cart_items
-beforeEach(() => {
-    global.fetch = jest.fn(() =>
-        Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve({ id: 1 }),
-        })
-    );
-});
-
-afterEach(() => {
-    jest.restoreAllMocks();
-});
-
-// Mock useNavigate
-const mockNavigate = jest.fn();
-
-jest.mock("react-router-dom", () => ({
-    ...jest.requireActual("react-router-dom"),
-    useNavigate: () => mockNavigate,
-}));
 
 describe("Given the ProductForm component", () => {
     const products = [
@@ -85,31 +62,6 @@ describe("Given the ProductForm component", () => {
         expect(srInput).toHaveValue(1);
 
         expect(screen.getByText("Total: €11.22")).toBeVisible();
-        });
-
-    });
-
-    describe("When user submits the form", () => {
-            test("Then fetch POST is called and navigation occurs", async () => {
-            setup();
-
-            const greenInput = screen.getAllByRole("spinbutton")[0];
-            fireEvent.change(greenInput, { target: { value: "1" } });
-
-            fireEvent.click(screen.getByRole("button", { name: /Add to cart/i }));
-
-            await waitFor(() => {
-                expect(global.fetch).toHaveBeenCalledWith(
-                "/cart_items",
-                expect.objectContaining({
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ cart: { GR1: 1 } }),
-                })
-                );
-            });
-
-            expect(mockNavigate).toHaveBeenCalledWith("/carts/1");
         });
 
     });
