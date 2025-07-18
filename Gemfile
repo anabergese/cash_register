@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # To connect with the frontend
-gem 'rack-cors'
+gem "rack-cors"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.2"

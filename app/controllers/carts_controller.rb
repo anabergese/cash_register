@@ -10,7 +10,7 @@ class CartsController < ApplicationController
       }
     end
 
-    total_cents = Checkout.new(products: cart.cart_items.flat_map { |i| [i.product] * i.quantity }).total_price_cents
+    total_cents = Checkout.new(products: cart.cart_items.flat_map { |i| [ i.product ] * i.quantity }).total_price_cents
 
     render json: { items: items, total_cents: total_cents }
   end

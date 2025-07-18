@@ -3,7 +3,7 @@ class CartItemsController < ApplicationController
 
     def create
         cart = Cart.create!(status: "open")
-        
+
         params[:cart]&.each do |code, quantity_str|
             quantity = quantity_str.to_i
             next if quantity <= 0
@@ -14,8 +14,7 @@ class CartItemsController < ApplicationController
             item = cart.cart_items.find_or_initialize_by(product: product)
             item.quantity = quantity
             item.save!
-
-        end
+    end
 
             render json: {
                 cart_id: cart.id,
